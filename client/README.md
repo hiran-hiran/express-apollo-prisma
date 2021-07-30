@@ -1,0 +1,7 @@
+- npx create-next-app .
+- touch tsconfig.json
+- npm install --save-dev typescript @types/react @types/node
+- npm run dev
+- npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
+- npx tailwindcss init -p
+- npm i -D eslint @typescript-eslint/eslint-plugin eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y @typescript-eslint/parser eslint-config-prettier prettier
