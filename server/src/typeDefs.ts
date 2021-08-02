@@ -8,10 +8,9 @@ export const typeDefs = gql`
 	}
 
 	type Query {
-		allUsers: [User!]!
-		hello: String
-		bye: String
+		getAllUsers: [User!]!
+		getUser(id: Int!): User
+		# hello: String
+		# bye: String
 	}
 `;
-
-// module.exports = typeDefs;

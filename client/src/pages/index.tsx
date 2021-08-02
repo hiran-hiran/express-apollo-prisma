@@ -9,7 +9,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const { data } = await client.query({
     query: gql`
       query {
-        allUsers {
+        getAllUsers {
           id
           name
           email
@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 type Props = {
   data: {
-    allUsers: {
+    getAllUsers: {
       id: number;
       name: string;
       email: string;
@@ -36,19 +36,15 @@ type Props = {
 };
 
 const Home: VFC<Props> = (props) => {
-
-  const handleClick = () => {
-    window.alert('Hello, World!');
-  };
-
   return (
     <Layout>
-      {props.data.allUsers.map((el, i) => {
-        return <p key={el.id}>{el.name}: { el.email}</p>;
+      {props.data.getAllUsers.map((el, i) => {
+        return (
+          <p key={el.id}>
+            {el.name}: {el.email}
+          </p>
+        );
       })}
-      <button className="p-2 bg-gray-500 text-white" onClick={handleClick}>
-        Click me!
-      </button>
     </Layout>
   );
 };

@@ -1,15 +1,19 @@
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
+import { Context } from './context';
 
 export const resolvers = {
 	Query: {
-		allUsers: () => {
-			return prisma.user.findMany()
+		getAllUsers: (parent: any, args: any, context: Context) => {
+			return context.prisma.user.findMany();
 		},
-		hello: () => 'Hello world!',
-		bye: () => 'Bye!!!',
+		getUser: (parent: any, args: { id: number }, context: Context) => {
+			// console.log('parent:', parent, 'args:', args, 'context:', context);
+			return context.prisma.user.findUnique({
+				where: {
+					id: args.id,
+				},
+			});
+		},
+		// hello: () => 'Hello world!',
+		// bye: () => 'Bye!!!',
 	},
 };
-
-// module.exports = resolvers;
