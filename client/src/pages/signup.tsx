@@ -3,9 +3,9 @@ import Layout from 'src/components/layout/layout';
 
 type Props = {};
 
-const signup: VFC<Props> = () => {
+const Signup: VFC<Props> = () => {
   const [input, setInput] = useState({
-    username: '',
+    name: '',
     email: '',
     password: '',
   });
@@ -29,7 +29,7 @@ const signup: VFC<Props> = () => {
           name="username"
           id="username"
           placeholder="Name"
-          value={input.username}
+          value={input.name}
           onChange={handleChange}
         />
         <input
@@ -59,4 +59,4 @@ const signup: VFC<Props> = () => {
   );
 };
 
-export default signup;
+export default Signup;
