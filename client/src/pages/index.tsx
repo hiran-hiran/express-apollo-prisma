@@ -31,14 +31,14 @@ type Props = {
       id: number;
       name: string;
       email: string;
-    };
+    }[];
   };
 };
 
 const Home: VFC<Props> = (props) => {
   return (
     <Layout>
-      {props.data.getAllUsers.map((el, i) => {
+      {props.data.getAllUsers.map((el) => {
         return (
           <p key={el.id}>
             {el.name}: {el.email}

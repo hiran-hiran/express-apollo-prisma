@@ -27,10 +27,10 @@ export const typeDefs = gql`
 	type Query {
 		getAllUsers: [User!]!
 		getUser(id: Int!): User
+		login(data: LoginUserInput!): AuthPayload!
 	}
 
 	type Mutation {
 		createUser(data: CreateUserInput): AuthPayload!
-		login(data: LoginUserInput!): AuthPayload!
 	}
 `;
