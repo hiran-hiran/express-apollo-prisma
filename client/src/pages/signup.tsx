@@ -1,13 +1,37 @@
 import { ChangeEvent, useState, VFC } from 'react';
 import Layout from 'src/components/layout/layout';
+import { gql, useMutation } from '@apollo/client';
 
-type Props = {};
+const CREATE_USER = gql`
+  mutation createUser($username: String!, $email: String!, $password: String!) {
+    createUser(data: { name: $username, email: $email, password: $password }) {
+      token
+      user {
+        id
+        name
+        email
+      }
+    }
+  }
+`;
 
-const Signup: VFC<Props> = () => {
+const Signup: VFC = () => {
   const [input, setInput] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
+  });
+
+  const [createUser] = useMutation(CREATE_USER, {
+    onCompleted(data) {
+      alert('登録できました');
+      console.log(data);
+      setInput({ username: '', email: '', password: '' });
+    },
+    onError(error) {
+      alert('登録に失敗しました');
+      console.log(error);
+    },
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,8 +40,14 @@ const Signup: VFC<Props> = () => {
     setInput({ ...input, [name]: value });
   };
 
-  const handleClick = () => {
-    window.alert('Hello, World!');
+  const handleClick = async () => {
+    createUser({
+      variables: {
+        username: input.username,
+        email: input.email,
+        password: input.password,
+      },
+    });
   };
 
   return (
@@ -29,7 +59,7 @@ const Signup: VFC<Props> = () => {
           name="username"
           id="username"
           placeholder="Name"
-          value={input.name}
+          value={input.username}
           onChange={handleChange}
         />
         <input
@@ -52,7 +82,7 @@ const Signup: VFC<Props> = () => {
         />
       </div>
 
-      <button className="block mx-auto mt-4 p-2 bg-gray-500 text-white " onClick={handleClick}>
+      <button className="block mx-auto mt-4 p-2 bg-gray-500 text-white" onClick={handleClick}>
         Sign up!
       </button>
     </Layout>

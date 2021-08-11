@@ -1,5 +1,7 @@
+import { ApolloProvider } from '@apollo/client';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { client } from 'src/utils/apollo-client';
 import 'styles/globals.css';
 import 'tailwindcss/tailwind.css';
 
@@ -9,7 +11,9 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Head>
         <title>TOP</title>
       </Head>
-      <Component {...pageProps} />
+      <ApolloProvider client={client}>
+        <Component {...pageProps} />
+      </ApolloProvider>
     </>
   );
 };
