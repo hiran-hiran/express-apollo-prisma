@@ -1,20 +1,8 @@
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { NextPage } from 'next';
 import Layout from 'src/components/layout/layout';
 import { useInput } from 'src/hooks/useInput';
-
-const LOGIN_USER = gql`
-  query login($email: String!, $password: String!) {
-    login(data: { email: $email, password: $password }) {
-      token
-      user {
-        id
-        email
-        name
-      }
-    }
-  }
-`;
+import { LOGIN_USER } from 'src/utils/query';
 
 const Login: NextPage = () => {
   const email = useInput('');
@@ -23,13 +11,14 @@ const Login: NextPage = () => {
   const [login] = useLazyQuery(LOGIN_USER, {
     onCompleted(data) {
       alert('ログインできました');
-      console.log(data);
+      console.log('data: ', data);
+      localStorage.setItem('auth-token', data.login.token);
       email.value = '';
       password.value = '';
     },
     onError(error) {
       alert('ログインに失敗しました');
-      console.log(error.message);
+      console.log('error.message: ', error.message);
     },
   });
 

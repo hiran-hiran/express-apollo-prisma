@@ -1,5 +1,4 @@
-import { GetStaticProps } from 'next';
-import type { VFC } from 'react';
+import { GetStaticProps, NextPage } from 'next';
 import Layout from 'src/components/layout/layout';
 
 import { gql } from '@apollo/client';
@@ -35,9 +34,10 @@ type Props = {
   };
 };
 
-const Home: VFC<Props> = (props) => {
+const Home: NextPage<Props> = (props) => {
   return (
     <Layout>
+      <h1 className="text-2xl font-bold">すべてのユーザー</h1>
       {props.data.getAllUsers.map((el) => {
         return (
           <p key={el.id}>

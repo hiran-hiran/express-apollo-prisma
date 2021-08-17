@@ -1,21 +1,10 @@
-import { ChangeEvent, useState, VFC } from 'react';
+import { NextPage } from 'next';
+import { ChangeEvent, useState } from 'react';
 import Layout from 'src/components/layout/layout';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { CREATE_USER } from 'src/utils/query';
 
-const CREATE_USER = gql`
-  mutation createUser($username: String!, $email: String!, $password: String!) {
-    createUser(data: { name: $username, email: $email, password: $password }) {
-      token
-      user {
-        id
-        name
-        email
-      }
-    }
-  }
-`;
-
-const Signup: VFC = () => {
+const Signup: NextPage = () => {
   const [input, setInput] = useState({
     username: '',
     email: '',
